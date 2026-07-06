@@ -24,7 +24,7 @@ public class MainTest {
         String resource = "/jkzx/apinterface/log/cursorList";
         Map<String, String> signData = new HashMap<>();
         signData.put("Resource", resource);
-        signData.put("X-Open-App-Key", "8757642179201138688");
+        signData.put("X-Open-App-Key", "8755471635089522688");
         signData.put("X-Open-Request-Id", UUID.randomUUID().toString());
         signData.put("X-Open-Timestamp", System.currentTimeMillis() + "");
         signData.put("X-Open-Version", "1.0.0");//默认：1.0.0
@@ -39,17 +39,17 @@ public class MainTest {
             signDataText.append(i == 0 ? "" : "&").append(key).append("=").append(value);
         }
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            String publicKeyCert = "MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAE3mJqV/zrpHLhVcZTdXCBQP5UqR4l" +
-                    "8tF7FqUQt5Ghwx8uxMnMRGGk2W07NqFGlHje9Y5XmLcdzmJb3JxooOCeow==";
-            String privateKeyCert = "MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQgC0wtYWflLV/dfzdn" +
-                    "rmvgoB6/H3SRPeFBOAVJ2UKPYvuhRANCAATeYmpX/OukcuFVxlN1cIFA/lSpHiXy" +
-                    "0XsWpRC3kaHDHy7EycxEYaTZbTs2oUaUeN71jleYtx3OYlvcnGig4J6j";
+            String publicKeyCert = "MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAE8MgQH37jUb1aSP4ODS/3cKvDW6lR" +
+                    "IsYbSmQjzErpFedc1Aq5x905HA98O5/IATGdFdusjQv9YDGKlVy60mWtvA==";
+            String privateKeyCert = "MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQgEY2xgUZ0DEnvGUFP" +
+                    "4SyzMVX4m3wm5wWRmy5+TsLkwk+hRANCAATwyBAffuNRvVpI/g4NL/dwq8NbqVEi" +
+                    "xhtKZCPMSukV51zUCrnH3TkcD3w7n8gBMZ0V26yNC/1gMYqVXLrSZa28";
             //公私钥转换
             PublicKey publicKey = Sm2Utils.getPublicKey(publicKeyCert);
             PrivateKey privateKey = Sm2Utils.getPrivateKey(privateKeyCert);
             //计算签名
             String sign = Sm2Utils.sign(privateKey, signDataText.toString());
-            HttpPost httpPost = new HttpPost("http://172.29.251.66/isgateway"+ resource);
+            HttpPost httpPost = new HttpPost("https://blmp.cdzjryb.com/qsmzq-all-api/isgateway-api"+ resource);
             httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
             httpPost.addHeader("X-Open-Sign", sign);
             for (Map.Entry<String, String> entry : signData.entrySet()) {
@@ -60,8 +60,6 @@ public class MainTest {
             dataMap.put("routeCode", "2842");
             dataMap.put("requestDate", Arrays.asList("2025-01-01 00:00:00", "2026-12-31 23:59:59"));
             dataMap.put("pageSize", 1);
-            // dataMap.put("frontendPath", "/jkzx/apinterface/log/cursorList");
-            // dataMap.put("cursor", "上次返回的nextCursor");
 
             ObjectMapper mapper = new ObjectMapper();
             //请求体json字符串（明文）
