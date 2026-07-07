@@ -33,6 +33,8 @@ public abstract class Sm2Utils {
     //默认编码字符集
     public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
+    private static final String KEY_PAIR_CHECK_TEXT = "funi-sm2-key-pair-check";
+
     static {
         BCProviderManager.register();
     }
@@ -158,5 +160,29 @@ public abstract class Sm2Utils {
         return signature.verify(signByte);
     }
 
-}
+    /**
+     * 校验公私钥是否成对。
+     *
+     * @param publicKey  公钥
+     * @param privateKey 私钥
+     * @return true为成对，false为不成对
+     */
+    public static boolean isKeyPairMatched(PublicKey publicKey, PrivateKey privateKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
+        String signData = sign(privateKey, KEY_PAIR_CHECK_TEXT);
+        return verifySign(publicKey, KEY_PAIR_CHECK_TEXT, signData);
+    }
 
+    /**
+     * 校验证书格式的公私钥是否成对。
+     *
+     * @param publicKeyCert  证书公钥
+     * @param privateKeyCert 证书私钥
+     * @return true为成对，false为不成对
+     */
+    public static boolean isKeyPairMatched(String publicKeyCert, String privateKeyCert) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException, InvalidKeyException, SignatureException {
+        PublicKey publicKey = getPublicKey(publicKeyCert);
+        PrivateKey privateKey = getPrivateKey(privateKeyCert);
+        return isKeyPairMatched(publicKey, privateKey);
+    }
+
+}
