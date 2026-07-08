@@ -4,11 +4,11 @@ import com.funi.platform.ccs.controller.Sm2Utils;
 
 public class KeyPairCheckDemo {
     public static void main(String[] args) {
-        String publicKeyCert = "MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEaM3WFv8c7D52+F+B8m3eaiJuLdQU" +
-                "g1owD2BKmznSEX4wNmlsHO1WhCyfvBznHObau4Dzm5Cn08eK1krTj3DXPQ==";
-        String privateKeyCert = "MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQgHmFJhdqXYiIwt2kJ" +
-                "AJ9sgrdpegDnu1zMZrZ6eBNSwjKhRANCAARozdYW/xzsPnb4X4Hybd5qIm4t1BSD" +
-                "WjAPYEqbOdIRfjA2aWwc7VaELJ+8HOcc5tq7gPObkKfTx4rWStOPcNc9";
+        String publicKeyCert = "MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEY1dYjLmMvTA7ioBzuou5o6e4S8e2" +
+                "zvYwaVZ+Fdt8bFJfifEOh2TUqVPD/QnTQqqqxuUTvW6YB0/if5sWTJ8yRg==";
+        String privateKeyCert = "MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQgd9slOhHR13hR9F/v" +
+                "tuD+3jlhVybHzzDN6Xw1qynaGOuhRANCAAS1U1k0nSD8HlwThwN4a6BxcJ8pEHCM" +
+                "7YGPjHsapN2+r/SI7vRrzldWVJc5V1s0KgL6xWQA4z2q5SMDM1Dsip6H";
 
         try {
             boolean matched = Sm2Utils.isKeyPairMatched(publicKeyCert, privateKeyCert);
