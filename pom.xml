@@ -17,7 +17,7 @@
     </properties>
 
     <dependencies>
-        <!-- 国密算法组件，版本需要在 1.60 以上 -->
+        <!-- 国密算法组件，版本必须在 1.60 以上 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
